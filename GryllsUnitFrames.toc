@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cffff8000Grylls|rUnitFrames
+## Author: Grylls
+## Notes: Enhances the default unitframes
+## Version: 3
+## Optionaldeps: MobHealth
+## SavedVariables: GryllsUnitFrames_Settings
+
+GryllsUnitFrames.lua
