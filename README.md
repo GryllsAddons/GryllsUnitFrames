@@ -1,10 +1,10 @@
 # GryllsUnitFrames
 Unit Frame Extension for World of Warcraft: Vanilla
 
-####Description:
-Modular enhancement
+Description:
+GryllsUnitFrames enhances the default player, target, target target, pet and party frames
 
-####Features:
+Features:
 - Display of player, target & target of target health & power values
 - Display of party health & power values
 - Option to show health as a value* and/or percent
@@ -23,5 +23,5 @@ Modular enhancement
 - 1.12 only allows us to get friendly player HP values if the player is in our party
 - mobhealth is required to display enemy health values (http://addons.us.to/addon/mobhealth)
 
-####Usage:
+Usage:
 /gryllsunitframes or /guf
