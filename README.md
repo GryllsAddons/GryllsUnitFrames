@@ -3,7 +3,8 @@ Unit Frame Extension for World of Warcraft: Vanilla
 
 ### Description:
 GryllsUnitFrames enhances the default player, target, target target, pet and party frames<br>
-The addon is highly configurable via the use of ingame commands
+The addon is highly configurable via the use of ingame commands<br>
+The addon will save settings per account<br>
 
 ### Features:
 - Show unit health and power values as value* and/or percent
