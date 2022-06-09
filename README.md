@@ -10,7 +10,7 @@ Features:
 - Show unit health and power values as value* and/or percent
 - Show short or long values e.g. 10.1k or 10,100
 - Target combat indicator
-- Class portraits
+- Class portraits (including target of target)
 - Class background coloring
 - Player & pets class coloring (Warlock and Hunter pets have respective class colors)
 - Mob name color by reaction
