@@ -29,12 +29,12 @@ Usage:
 
 ### Preview:
 Colored health values (energy autohides at 100)<br>
-<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF1.png" width=50% height=50%/>
+<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF1.png" width=50% height=50%/><br>
 Class portraits and target combat indicator<br>
-<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF2.png" width=50% height=50%/>
+<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF2.png" width=50% height=50%/><br>
 Percent values for units<br>
-<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF3.png" width=50% height=50%/>
+<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF3.png" width=50% height=50%/><br>
 Name and value font and size changed, health coloring off
-<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF4.png" width=50% height=50%/>
+<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF4.png" width=50% height=50%/><br>
 Resouce mode (health values hidden, non mana values shown)
-<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF5.png" width=50% height=50%/>
+<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF5.png" width=50% height=50%/><br>
