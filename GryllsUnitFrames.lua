@@ -383,7 +383,7 @@ local function GryllsUnitFrames_setup()
     TargetofTargetDeadText:SetText("")
 end
 
-local function GryllsUnitFrames_colorClass(unit)
+local function GryllsUnitFrames_localizedClass(unit)
     local class = UnitClass(unit) -- get Localized name
     if (GetLocale() == "deDE") then
         if class == "Krieger" then
@@ -548,7 +548,7 @@ local function GryllsUnitFrames_colorName(unit)
                 local r,g,b
                 if UnitIsPlayer(unit) then
                     -- color by class
-                    local colorClass = GryllsUnitFrames_colorClass(unit)
+                    local colorClass = GryllsUnitFrames_localizedClass(unit)
                     if colorClass == "SHAMAN" then
                         r, g, b = 0/255, 112/255, 221/255 -- blue shamans
                     else
@@ -887,6 +887,77 @@ local function GryllsUnitFrames_updatePower(unit)
     end
 end
 
+-- credit to Shagu (https://shagu.org/ShaguTweaks/) for code below
+local function updatePortraits(frame, unit)
+    if GryllsUnitFrames_Settings.classportraits then
+        local CLASS_ICON_TCOORDS = {
+            ["WARRIOR"] = { 0, 0.25, 0, 0.25 },
+            ["MAGE"] = { 0.25, 0.49609375, 0, 0.25 },
+            ["ROGUE"] = { 0.49609375, 0.7421875, 0, 0.25 },
+            ["DRUID"] = { 0.7421875, 0.98828125, 0, 0.25 },
+            ["HUNTER"] = { 0, 0.25, 0.25, 0.5 },
+            ["SHAMAN"] = { 0.25, 0.49609375, 0.25, 0.5 },
+            ["PRIEST"] = { 0.49609375, 0.7421875, 0.25, 0.5 },
+            ["WARLOCK"] = { 0.7421875, 0.98828125, 0.25, 0.5 },
+            ["PALADIN"] = { 0, 0.25, 0.5, 0.75 },
+        }
+
+        local portrait = nil
+        local class = GryllsUnitFrames_localizedClass(unit)
+        
+        if frame == TargetTargetFrame then
+            portrait = TargetofTargetPortrait
+        else
+            portrait = frame.portrait
+        end
+
+        -- detect unit class or remove for non-player units            
+        class = UnitIsPlayer(unit) and class or nil
+        
+        -- update class icon if possible
+        if class then
+            local iconCoords = CLASS_ICON_TCOORDS[class]
+            portrait:SetTexture("Interface\\Addons\\GryllsUnitFrames\\UI-Classes-Circles")
+            portrait:SetTexCoord(unpack(iconCoords))
+        elseif not class then
+            portrait:SetTexCoord(0, 1, 0, 1)
+        end
+    end
+end
+
+local function GryllsUnitFrames_classPortraits()
+	if GryllsUnitFrames_Settings.classportraits then
+
+        local tot = CreateFrame("Frame")
+        local events = CreateFrame("Frame")
+        events:RegisterEvent("PLAYER_ENTERING_WORLD")
+        events:RegisterEvent("PLAYER_TARGET_CHANGED")
+        events:RegisterEvent("PARTY_MEMBERS_CHANGED")
+        events:RegisterEvent("UNIT_PORTRAIT_UPDATE")
+        -- events:RegisterEvent("UNIT_NAME_UPDATE")
+        events:RegisterEvent("UNIT_HEALTH")
+        events:RegisterEvent("PLAYER_REGEN_DISABLED") -- in combat
+        events:SetScript("OnEvent", function()
+            if (event == "PLAYER_ENTERING_WORLD" or event == "UNIT_PORTRAIT_UPDATE") then
+                updatePortraits(PlayerFrame, "player")
+                updatePortraits(TargetFrame, "target")
+                updatePortraits(TargetTargetFrame, "targettarget")
+                updatePortraits(PartyMemberFrame, "party1")
+                updatePortraits(PartyMemberFrame2, "party2")
+                updatePortraits(PartyMemberFrame3, "party3")
+                updatePortraits(PartyMemberFrame4, "party4")
+            elseif (event == "PARTY_MEMBERS_CHANGED") then
+                updatePortraits(PartyMemberFrame, "party1")
+                updatePortraits(PartyMemberFrame2, "party2")
+                updatePortraits(PartyMemberFrame3, "party3")
+                updatePortraits(PartyMemberFrame4, "party4")
+            elseif (event == "PLAYER_TARGET_CHANGED") then --or (event == "UNIT_NAME_UPDATE" and arg1 == "target") then
+                updatePortraits(TargetFrame, "target")
+            end
+        end)
+    end
+end
+
 local function GryllsUnitFrames_tot()
     if GryllsUnitFrames_Settings.tot then
         local function updateHealth()
@@ -905,7 +976,11 @@ local function GryllsUnitFrames_tot()
         end
 
         local totName = nil
-        TargetofTargetHealthBar:SetScript("OnValueChanged", updateHealth)
+        TargetofTargetHealthBar:SetScript("OnValueChanged", function()
+            updateHealth()
+            updatePortraits(TargetTargetFrame, "targettarget")
+        end)
+
         TargetofTargetManaBar:SetScript("OnValueChanged", updatePower)
     end    
     GryllsUnitFrames_updateHealthBar("targettarget")
@@ -941,113 +1016,6 @@ local function GryllsUnitFrames_updateUnitFrames()
     GryllsUnitFrames_colorName("target")
 
     GryllsUnitFrames_updatePartyFrames()
-end
-
-local function GryllsUnitFrames_classPortraits()
-	if GryllsUnitFrames_Settings.classportraits then
-        -- credit to KoOz (https://github.com/Ko0z/UnitFramesImproved_Vanilla) for code below
-        local iconPath="Interface\\Addons\\GryllsUnitFrames\\UI-Classes-Circles"
-        -- copied from TBC Client 2.4.3
-        local CLASS_BUTTONS = {
-            ["HUNTER"] = {
-                0, -- [1]	
-                0.25, -- [2] 
-                0.25, -- [3] 
-                0.5, -- [4]  
-            },
-            ["WARRIOR"] = {
-                0, -- [1]
-                0.25, -- [2]
-                0, -- [3]
-                0.25, -- [4]
-            },
-            ["ROGUE"] = {
-                0.49609375, -- [1]
-                0.7421875, -- [2]
-                0, -- [3]
-                0.25, -- [4]
-            },
-            ["MAGE"] = {
-                0.25, -- [1]
-                0.49609375, -- [2]
-                0, -- [3]
-                0.25, -- [4]
-            },
-            ["PRIEST"] = {
-                0.49609375, -- [1]
-                0.7421875, -- [2]
-                0.25, -- [3]
-                0.5, -- [4]
-            },
-            ["WARLOCK"] = {
-                0.7421875, -- [1]
-                0.98828125, -- [2]
-                0.25, -- [3]
-                0.5, -- [4]
-            },
-            ["DRUID"] = {
-                0.7421875, -- [1]
-                0.98828125, -- [2]
-                0, -- [3]
-                0.25, -- [4]
-            },
-            ["SHAMAN"] = {
-                0.25, -- [1]
-                0.49609375, -- [2]
-                0.25, -- [3]
-                0.5, -- [4]
-            },
-            ["PALADIN"] = {
-                0, -- [1]
-                0.25, -- [2]
-                0.5, -- [3]
-                0.75, -- [4]
-            },
-        }
-
-        local partyFrames = {
-            [1] = PartyMemberFrame1,
-            [2] = PartyMemberFrame2,
-            [3] = PartyMemberFrame3,
-            [4] = PartyMemberFrame4,
-        }
-
-        local ClassPortraits = CreateFrame("Frame")
-        ClassPortraits:RegisterEvent("PLAYER_ENTERING_WORLD")
-        ClassPortraits:RegisterEvent("UNIT_PORTRAIT_UPDATE")
-        ClassPortraits:RegisterEvent("PLAYER_TARGET_CHANGED")
-        ClassPortraits:SetScript("OnEvent", function()
-            if PlayerFrame.portrait~=nil then
-                local _, class = UnitClass("player")
-                local iconCoords = CLASS_BUTTONS[class]
-                PlayerFrame.portrait:SetTexture(iconPath, true)
-                PlayerFrame.portrait:SetTexCoord(unpack(iconCoords))
-            end
-            for i=1, GetNumPartyMembers() do
-                if partyFrames[i].portrait~=nil then
-                    local _, class = UnitClass("party"..i)
-                    if not CLASS_BUTTONS[class] then return end
-                    partyFrames[i].portrait:SetTexture(iconPath, true)
-                    partyFrames[i].portrait:SetTexCoord(unpack(CLASS_BUTTONS[class]))
-                end
-            end
-                if(UnitName("target")~=nil and UnitIsPlayer("target") ~= nil and TargetFrame.portrait~=nil) then
-                    local _, class = UnitClass("target")
-                    TargetFrame.portrait:SetTexture(iconPath, true)
-                    TargetFrame.portrait:SetTexCoord(unpack(CLASS_BUTTONS[class]))
-                elseif(UnitName("target")~=nil) then
-                    TargetFrame.portrait:SetTexCoord(0,1,0,1)
-                end
-        
-                if(UnitName("targettarget")~=nil and UnitIsPlayer("targettarget") ~= nil and TargetofTargetFrame.portrait~=nil) then
-                local _, class = UnitClass("targettarget")
-                TargetofTargetFrame.portrait:SetTexture(iconPath, true)
-                TargetofTargetFrame.portrait:SetTexCoord(unpack(CLASS_BUTTONS[class]))
-                elseif(UnitName("targettarget")~=nil) then
-                    TargetofTargetFrame.portrait:SetTexCoord(0,1,0,1)
-            end
-        end)
-    end
 end
 
 local function GryllsUnitFrames_commands(msg, editbox)
@@ -1233,7 +1201,7 @@ local function GryllsUnitFrames_commands(msg, editbox)
     elseif msg == "color health" then
         if GryllsUnitFrames_Settings.colorhealth then
             GryllsUnitFrames_Settings.colorhealth = false
-            DEFAULT_CHAT_FRAME:AddMessage("GryllsUnitFrames: health coloring off (requires reload)")
+            DEFAULT_CHAT_FRAME:AddMessage("GryllsUnitFrames: health coloring off")
             GryllsUnitFrames_updateUnitFrames()
         else
             GryllsUnitFrames_Settings.colorhealth = true
@@ -1337,7 +1305,7 @@ GryllsUnitFrames:RegisterEvent("PLAYER_TARGET_CHANGED")
 GryllsUnitFrames:RegisterEvent("UNIT_PET")
 
 GryllsUnitFrames:SetScript("OnEvent", function()
-    if event == "ADDON_LOADED" then
+    if (event == "ADDON_LOADED") then
         if not GryllsUnitFrames.loaded then  
             SLASH_GRYLLSUNITFRAMES1 = "/gryllsunitframes"
             SLASH_GRYLLSUNITFRAMES2 = "/guf"
