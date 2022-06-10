@@ -49,5 +49,5 @@ Percent values for units<br>
 <img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF3.png" width=50% height=50%/><br>
 Name and value font and size changed, health coloring off<br>
 <img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF4.png" width=50% height=50%/><br>
-Resouce mode (health values hidden, non mana values shown)<br>
+Resource mode (health values hidden, non mana values shown)<br>
 <img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF5.png" width=50% height=50%/><br>
