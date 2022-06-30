@@ -40,6 +40,7 @@ The addon will save settings per account<br>
 /guf font - shows options for changing the font<br>
 /guf combat text - toggles hiding the combat text shown on the portrait<br>
 /guf combat indicator - toggles the target combat indicator<br>
+/guf tic - toggles the tick indicator<br>
 /guf reset - resets all options to default<br>
 
 ### Preview:
