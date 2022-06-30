@@ -7,3 +7,4 @@
 ## SavedVariables: GryllsUnitFrames_Settings
 
 GryllsUnitFrames.lua
+GryllsUnitFrames.xml
