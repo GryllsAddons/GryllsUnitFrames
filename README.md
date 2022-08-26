@@ -53,5 +53,3 @@ Name and value font and size changed, health coloring off<br>
 <img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF4.png" width=50% height=50%/><br>
 Resource mode (health values hidden, non mana values shown)<br>
 <img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF5.png" width=50% height=50%/><br>
-Show additional buffs<br>
-<img src="https://raw.githubusercontent.com/GryllsAddons/AddonPreviews/main/GryllsUnitFrames/GUF6.png" width=25% height=25%/><br>
