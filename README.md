@@ -21,7 +21,6 @@ The addon will save settings per account<br>
 - Change the font and size of health and power values
 - Resource mode hides all values apart from rage and energy for a minimal look
 - Energy tick support
-- Shows all 16 target buffs
 
 *Addon limitations:
 - 1.12 only allows us to get friendly player HP values if the player is in our party
