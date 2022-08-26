@@ -1299,6 +1299,7 @@ local function GryllsUnitFrames_commands(msg, editbox)
     end
 end
 
+--[[
 function GryllsUnitFrames_TargetDebuffButton_Update()
     -- FrameXML/TargetFrame.lua
     local buff, buffButton;
@@ -1352,9 +1353,17 @@ function GryllsUnitFrames_TargetDebuffButton_Update()
 	local debuffFrame, debuffWrap, debuffSize, debuffFrameSize;
 	local targetofTarget = TargetofTargetFrame:IsShown();
 
+    local function TargetFrameAnchor(buffs)
+        if ( buffs > 5 ) then
+            return 6
+        else
+            return 1
+        end
+    end
+
 	if ( UnitIsFriend("player", "target") ) then
 		TargetFrameBuff1:SetPoint("TOPLEFT", "TargetFrame", "BOTTOMLEFT", 5, 32);
-		TargetFrameDebuff1:SetPoint("TOPLEFT", "TargetFrameBuff1", "BOTTOMLEFT", 0, -2);
+		TargetFrameDebuff1:SetPoint("TOPLEFT", "TargetFrameBuff"..TargetFrameAnchor(numDebuffs), "BOTTOMLEFT", 0, -2);
 	else
 		TargetFrameDebuff1:SetPoint("TOPLEFT", "TargetFrame", "BOTTOMLEFT", 5, 32);
 		if ( targetofTarget ) then
@@ -1366,7 +1375,7 @@ function GryllsUnitFrames_TargetDebuffButton_Update()
 				TargetFrameBuff1:SetPoint("TOPLEFT", "TargetFrameDebuff11", "BOTTOMLEFT", 0, -2);
 			end
 		else
-			TargetFrameBuff1:SetPoint("TOPLEFT", "TargetFrameDebuff7", "BOTTOMLEFT", 0, -2);
+			TargetFrameBuff1:SetPoint("TOPLEFT", "TargetFrameDebuff"..TargetFrameAnchor(numBuffs), "BOTTOMLEFT", 0, -2);
 		end
 	end
 
@@ -1424,6 +1433,7 @@ function GryllsUnitFrames_TargetDebuffButton_Update()
 		TargetFrameDebuff11:SetPoint("LEFT", "TargetFrameDebuff10", "RIGHT", 3, 0);
 	end
 end
+]]
 
 GryllsUnitFrames:RegisterEvent("ADDON_LOADED")
 GryllsUnitFrames:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -1457,7 +1467,7 @@ GryllsUnitFrames:SetScript("OnEvent", function()
             GryllsUnitFrames_classPortraits()
 
             -- hook TargetDebuffButton_Update
-            TargetDebuffButton_Update = GryllsUnitFrames_TargetDebuffButton_Update
+            -- TargetDebuffButton_Update = GryllsUnitFrames_TargetDebuffButton_Update
 
             DEFAULT_CHAT_FRAME:AddMessage("|cffff8000Grylls|rUnitFrames loaded! /guf")
             GryllsUnitFrames.loaded = true
