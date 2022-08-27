@@ -5,8 +5,8 @@
 
 _G = getfenv()
 local GryllsUnitFrames = CreateFrame("Frame", nil, UIParent)
-GryllsUnitFrames.MAX_TARGET_BUFFS = 16
-GryllsUnitFrames.MAX_TARGET_DEBUFFS = 16
+--GryllsUnitFrames.MAX_TARGET_BUFFS = 16
+--GryllsUnitFrames.MAX_TARGET_DEBUFFS = 16
 
 GryllsUnitFrames_Settings = {
     both = false,
