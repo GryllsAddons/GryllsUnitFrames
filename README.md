@@ -6,6 +6,8 @@ GryllsUnitFrames enhances the default player, target, target target, pet and par
 The addon is highly configurable via the use of ingame commands<br>
 The addon will save settings per account<br>
 
+##### Many of the features of this addon are now available as a [ShaguTweaks mod](https://github.com/GryllsAddons/ShaguTweaks-Mods)
+
 ### Features:
 - Show unit health and power values as value* and/or percent
 - Show short or long values e.g. 10.1k or 10,100
