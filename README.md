@@ -1,12 +1,12 @@
 # GryllsUnitFrames
 Unit Frame Extension for World of Warcraft: Vanilla
 
+## Many of the features of this addon are now available as a [ShaguTweaks mod](https://github.com/GryllsAddons/ShaguTweaks-Mods)
+
 ### Description:
 GryllsUnitFrames enhances the default player, target, target target, pet and party frames<br>
 The addon is highly configurable via the use of ingame commands<br>
 The addon will save settings per account<br>
-
-##### Many of the features of this addon are now available as a [ShaguTweaks mod](https://github.com/GryllsAddons/ShaguTweaks-Mods)
 
 ### Features:
 - Show unit health and power values as value* and/or percent
